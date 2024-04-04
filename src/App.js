@@ -8,7 +8,7 @@ function App() {
       .then(response => response.json())
       .then(data => setTasks(data))
   }, [])
-  
+
   let data_level = document.querySelectorAll('.task');
   let data;
   [...data_level].forEach((element) => {
@@ -18,21 +18,26 @@ function App() {
 
   return (
     <div className='tasks-container'>
-      {tasks.map(task => {
-        return (
-          <div className='task' level={task.fields.level}>
-            <div className='name'>{task.fields.name}</div>
-            <div className='description'>{task.fields.description}</div>
-            <div className='completion'>{task.fields.completion}%</div>
-            <div className='date'>{task.fields.date_start}</div>
-            <div className='date'>{task.fields.date_end}</div>
-            <div className='employee'>{task.fields.supervisor}</div>
-            <div className='employee'>{task.fields.executor}</div>
-          </div>
-        )
-      })}
+          {tasks.map(task => {
+            return <TaskCard fields={task.fields} />
+          })}
     </div>
   );
+}
+
+
+function TaskCard(props) {
+  return (
+      <div className='task' level={props.fields.level}>
+        <div className='name'>{props.fields.name}</div>
+        <div className='description'>{props.fields.description}</div>
+        <div className='completion'>{props.fields.completion}%</div>
+        <div className='date'>{props.fields.date_start}</div>
+        <div className='date'>{props.fields.date_end}</div>
+        <div className='employee'>{props.fields.supervisor}</div>
+        <div className='employee'>{props.fields.executor}</div>
+      </div>
+  )
 }
 
 
